@@ -1,6 +1,9 @@
 package com.northcoders.model;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 
 @Entity
 public class Building {
@@ -29,6 +32,7 @@ public class Building {
     }
 
     @Column(name="name")
+    @NotEmpty(message = "The name of the building is required")
     public String getBuildingName() {
         return this.name;
     }
@@ -38,6 +42,7 @@ public class Building {
     }
 
     @Column(name="type")
+    @NotEmpty(message = "The type of building is required")
     public String getBuildingType() {
         return this.type;
     }
@@ -47,6 +52,7 @@ public class Building {
     }
 
     @Column(name="no_of_rooms")
+    @Min(value = 1, message = "The number of rooms should be at least 1")
     public int getNoOfRooms() {
         return this.noOfRooms;
     }
@@ -56,6 +62,7 @@ public class Building {
     }
 
     @Column(name="no_of_parking_spaces")
+    @Min(value = 0, message = "The number of parking spaces should be at least 0")
     public int getNoOfParkingSpaces() {
         return this.noOfParkingSpaces;
     }

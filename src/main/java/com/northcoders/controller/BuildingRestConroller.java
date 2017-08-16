@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -31,7 +32,7 @@ public class BuildingRestConroller {
 
     @CrossOrigin("*")
     @RequestMapping(value="/buildings/{buildingId}", method = RequestMethod.POST)
-    public void saveBuilding(@RequestBody Building building) {
+    public void saveBuilding(@Valid @RequestBody Building building) {
         buildingRepository.save(building);
     }
 
