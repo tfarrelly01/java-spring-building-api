@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Buildings</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<table border="1">
+    <tr th:each="building,itrStat : ${buildings}">
+        <td><span th:text="${building.buildingName}" /></td>
+        <td><span th:text="${building.buildingType}" /></td>
+        <td><a th:href="@{'/buildings/' + ${itrStat.index}}">Details</a></td>
+    </tr>
+</table>
+<p>
+    <a href="/buildings/add">Add a building</a>
+</p>
+</body>
+</html>

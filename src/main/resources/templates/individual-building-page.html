@@ -1,0 +1,25 @@
+
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>NorthCoders - Java Spring Building MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<h1>Building</h1>
+<p>
+    <strong>Building Name: </strong><span th:text="${building.buildingName}" />
+</p>
+<p>
+    <strong>Type of building: </strong><span th:text="${building.buildingType}" />
+</p>
+<p>
+    <strong>Number of rooms: </strong><span th:text="${building.noOfRooms} + ' rooms'"/>
+</p>
+<p>
+    <strong>Number of parking spaces: </strong><span th:text="${building.noOfParkingSpaces} + ' spaces'" />
+</p>
+</body>
+</html>
