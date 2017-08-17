@@ -2,6 +2,8 @@ package com.northcoders.controller;
 
 import com.northcoders.model.Building;
 import com.northcoders.repository.BuildingRepository;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
@@ -99,15 +101,16 @@ public class BuildingRestControllerTests {
         building.setNoOfRooms(10);
         building.setNoOfParkingSpaces(4);
 
-        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/buildings/-1", building).accept(MediaType.APPLICATION_JSON);
+        String buildingJson = new ObjectMapper().writeValueAsString(building);
+
+        Mockito.when(buildingRepository.save(building)).thenReturn(building);
+
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.post("/buildings/-1").contentType(MediaType.APPLICATION_JSON).content(buildingJson);
 
         MvcResult result = mockMvc.perform(requestBuilder).andReturn();
 
-        String expected = "{buildingId:1,buildingName:GreenLeaves,buildingType:Bungalow,noOfRooms:10,noOfParkingSpaces:4}";
-
-        System.out.println(result.getResponse().getContentAsString());
-
-        JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
+        Mockito.verify(buildingRepository, Mockito.times(1)).save(Mockito.any(Building.class));
+        Assert.assertEquals(200, result.getResponse().getStatus());
     }
 
 }
