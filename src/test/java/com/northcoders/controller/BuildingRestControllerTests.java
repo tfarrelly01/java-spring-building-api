@@ -113,5 +113,30 @@ public class BuildingRestControllerTests {
         Assert.assertEquals(200, result.getResponse().getStatus());
     }
 
+/*
+    @Test
+    public void updateBuildingSuccess() throws Exception {
+        Building building = new Building();
+        building.setBuildingId(1L);
+        building.setBuildingName("GreenLeaves");
+        building.setBuildingType("Bungalow");
+        building.setNoOfRooms(10);
+        building.setNoOfParkingSpaces(4);
+
+        Mockito.when(buildingRepository.findById(building.getId())).thenReturn(building);
+        .doNothing().when(userService).update(user);
+
+        mockMvc.perform(
+                put("/users/{id}", user.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(asJsonString(user)))
+                .andExpect(status().isOk());
+
+        verify(userService, times(1)).findById(user.getId());
+        verify(userService, times(1)).update(user);
+        verifyNoMoreInteractions(userService);
+    }
+    */
+
 }
 
