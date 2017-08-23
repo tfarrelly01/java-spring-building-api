@@ -19,7 +19,12 @@ node {
      sh "docker build -t mybuildings ."
    }
 
+   stage('Stop app') {
+     sh "docker stop mybuildings || true"
+     sh "docker rm mybuildings || true"
+   }
+
    stage('Docker Deploy') {
-        sh "docker run -d -p 8081:8080 mybuildings"
+        sh "docker run -d --name mybuildings -p 8081:8080 mybuildings"
    }
 }
