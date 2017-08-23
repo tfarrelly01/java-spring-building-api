@@ -9,6 +9,6 @@ node {
      sh "mvn -Dmaven.test.failure.ignore package"
    }
    stage('Docker Build') {
-     sh "docker build -t mybuildings"
+     sh "docker build -t mybuildings ."
    }
 }
