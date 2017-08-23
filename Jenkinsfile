@@ -1,4 +1,8 @@
 node {
+    stage('Slack started') {
+        slackSend channel: "#northcoders-java", message: "FINGERS CROSSED - start building"
+   }
+
    stage('Preparation') {
      git 'https://github.com/tfarrelly01/java-spring-building-api.git'
    }
