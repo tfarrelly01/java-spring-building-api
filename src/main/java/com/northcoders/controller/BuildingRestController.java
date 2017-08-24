@@ -1,6 +1,10 @@
 package com.northcoders.controller;
 
 import com.northcoders.model.Building;
+//LOGGING
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.northcoders.repository.BuildingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,6 +18,8 @@ import java.util.List;
 @RestController
 public class BuildingRestController {
 
+    // LOGGING
+    private final Logger logger = LoggerFactory.getLogger(BuildingRestController.class);
 
     @Autowired
     protected BuildingRepository buildingRepository;
@@ -29,7 +35,18 @@ public class BuildingRestController {
     @CrossOrigin("*")
     @RequestMapping(value = "/buildings/{buildingId}", method = RequestMethod.GET)
     public Building getIndividualBuilding(@PathVariable Long buildingId) {
+
+        // LOGGING
+        logger.debug("getIndividualBuilding STARTED");
         Building building = buildingRepository.findOne(buildingId);
+
+        // LOGGING
+        if(building == null) {
+            logger.warn("building {} doesn't exist", buildingId);
+        }
+
+        // LOGGING
+        logger.debug("getIndividualBuilding ENDED");
 
         return building;
     }
