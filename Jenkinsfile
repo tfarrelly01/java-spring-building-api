@@ -25,6 +25,6 @@ node {
    }
 
    stage('Docker Deploy') {
-        sh "docker run -d --name mybuildings -p 8081:8080 mybuildings"
+       sh "docker run -d --name mybuildings --link buildings:buildings -p 8081:8080 mybuildings"
    }
 }
