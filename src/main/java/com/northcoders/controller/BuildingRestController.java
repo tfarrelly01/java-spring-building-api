@@ -62,12 +62,16 @@ public class BuildingRestController {
     @CrossOrigin("*")
     @RequestMapping(value = "/buildings/{buildingId}", method = RequestMethod.PUT)
     public ResponseEntity<Building> updateBuilding(@PathVariable("buildingId") long buildingId, @RequestBody Building building) {
-        System.out.println("Updating Building " + buildingId);
+
+        // LOGGING
+        // System.out.println("Updating Building " + buildingId);
+        logger.debug("updateBuilding STARTED");
 
         Building currentBuilding = buildingRepository.findOne(buildingId);
 
         if (currentBuilding==null) {
-            System.out.println("User with id " + buildingId + " not found");
+    //        System.out.println("Building with id " + buildingId + " not found");
+            logger.warn("Building with id {} not found", buildingId);
             return new ResponseEntity<Building>(HttpStatus.NOT_FOUND);
         }
 
@@ -76,7 +80,18 @@ public class BuildingRestController {
         currentBuilding.setNoOfRooms(building.getNoOfRooms());
         currentBuilding.setNoOfParkingSpaces(building.getNoOfParkingSpaces());
 
-        buildingRepository.save(currentBuilding);
+
+        try {
+            buildingRepository.save(currentBuilding);
+        }
+        catch(Exception exc) {
+            logger.error("Writing to database:  update building Id {}", exc);
+            throw exc;
+        }
+
+        // LOGGING
+        logger.debug("updateBuilding ENDED");
+
         return new ResponseEntity<Building>(currentBuilding, HttpStatus.OK);
     }
 

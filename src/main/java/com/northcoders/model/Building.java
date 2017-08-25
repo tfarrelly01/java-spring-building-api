@@ -71,4 +71,16 @@ public class Building {
         this.noOfParkingSpaces = noOfParkingSpaces;
     }
 
+    // Used for LOGGING
+    @Override
+    public String toString() {
+        return "Building{" +
+                "buildingId=" + buildingId +
+                ", name='" + name + '\'' +
+                ", type=" + type +
+                ", noOfRooms='" + noOfRooms + '\'' +
+                ", noOfParkingSpaces=" + noOfParkingSpaces +
+                '}';
+    }
+
 }
